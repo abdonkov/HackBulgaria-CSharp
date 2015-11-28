@@ -13,6 +13,7 @@ namespace PolygonCircumference
         {
             float perimeter = 0;
             if (points.Length < 3) throw new ArgumentException();
+            PointF firstPoint = points[0];
             PointF lastPoint = points[0];
 
             for (int i = 1; i < points.Length; i++)
@@ -20,6 +21,9 @@ namespace PolygonCircumference
                 perimeter += (float)Math.Sqrt(Math.Pow(points[i].X - lastPoint.X, 2) + Math.Pow(points[i].Y - lastPoint.Y, 2));
                 lastPoint = points[i];
             }
+
+            perimeter += (float)Math.Sqrt(Math.Pow(firstPoint.X - lastPoint.X, 2) + Math.Pow(firstPoint.Y - lastPoint.Y, 2));
+
 
             return perimeter;
         }

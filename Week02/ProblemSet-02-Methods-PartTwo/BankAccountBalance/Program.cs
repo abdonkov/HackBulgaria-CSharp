@@ -98,7 +98,7 @@ namespace BankAccountBalance
             Console.OutputEncoding = Encoding.Unicode;
             Thread.CurrentThread.CurrentCulture = new CultureInfo("bg-BG");
             List<BankTransaction> transactions = ReadTransactions("Pesho.txt");
-            MoneyUsageInDateRange(transactions, new DateTime(2015, 4, 25), new DateTime(2015, 4, 30));
+            MoneyUsageInDateRange(transactions, new DateTime(2015, 2, 25), new DateTime(2015, 4, 30));
 
             Console.ReadKey();
         }
