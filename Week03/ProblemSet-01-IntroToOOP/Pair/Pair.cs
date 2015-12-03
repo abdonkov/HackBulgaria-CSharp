@@ -67,12 +67,12 @@ namespace Pair
 
         public static bool operator ==(Pair pair1, Pair pair2)
         {
-            return pair1.Equals(pair2);
+            return object.Equals(pair1, pair2);
         }
 
         public static bool operator !=(Pair pair1, Pair pair2)
         {
-            return !pair1.Equals(pair2);
+            return !object.Equals(pair1, pair2);
         }
     }
 }

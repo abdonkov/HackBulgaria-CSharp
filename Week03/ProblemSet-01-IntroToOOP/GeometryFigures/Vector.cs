@@ -71,12 +71,12 @@ namespace GeometryFigures
 
         public static bool operator ==(Vector v1, Vector v2)
         {
-            return v1.Equals(v2);
+            return object.Equals(v1, v2);
         }
 
         public static bool operator !=(Vector v1, Vector v2)
         {
-            return !v1.Equals(v2);
+            return !object.Equals(v1, v2);
         }
 
         public override int GetHashCode()

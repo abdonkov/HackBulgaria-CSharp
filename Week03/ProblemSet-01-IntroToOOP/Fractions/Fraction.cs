@@ -55,12 +55,12 @@ namespace Fractions
 
         public static bool operator ==(Fraction frac1, Fraction frac2)
         {
-            return frac1.Equals(frac2);
+            return object.Equals(frac1, frac2);
         }
 
         public static bool operator !=(Fraction frac1, Fraction frac2)
         {
-            return !frac1.Equals(frac2);
+            return !object.Equals(frac1, frac2);
         }
 
         public override int GetHashCode()

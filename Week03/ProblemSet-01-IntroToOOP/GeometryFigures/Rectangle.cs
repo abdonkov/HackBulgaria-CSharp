@@ -115,12 +115,12 @@ namespace GeometryFigures
 
         public static bool operator ==(Rectangle rect1, Rectangle rect2)
         {
-            return rect1.Equals(rect2);
+            return object.Equals(rect1, rect2);
         }
 
         public static bool operator !=(Rectangle rect1, Rectangle rect2)
         {
-            return !rect1.Equals(rect2);
+            return !object.Equals(rect1, rect2);
         }
 
         public override int GetHashCode()

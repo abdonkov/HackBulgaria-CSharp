@@ -51,12 +51,12 @@ namespace GeometryFigures
 
         public static bool operator ==(LineSegment ls1, LineSegment ls2)
         {
-            return ls1.Equals(ls2);
+            return object.Equals(ls1, ls2);
         }
 
         public static bool operator !=(LineSegment ls1, LineSegment ls2)
         {
-            return !ls1.Equals(ls2);
+            return !object.Equals(ls1, ls2);
         }
 
         public override int GetHashCode()
