@@ -10,7 +10,7 @@ namespace GeometryFigures
     {
         private readonly double x;
         private readonly double y;
-        private static readonly Point origin = new Point(0, 0);
+        public static readonly Point Origin = new Point(0, 0);
         public double X { get { return x; } }
         public double Y { get { return y; } }
 
