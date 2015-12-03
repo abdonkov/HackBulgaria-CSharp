@@ -58,6 +58,24 @@ namespace GeometryFigures
             center = new Point(p1.X + width / 2, p1.Y + height / 2);
         }
 
+        public Rectangle(Rectangle rect)
+        {
+            lowerLeftPoint = new Point(rect.lowerLeftPoint.X, rect.lowerLeftPoint.Y);
+            lowerRightPoint = new Point(rect.lowerRightPoint.X, rect.lowerRightPoint.Y);
+            upperLeftPoint = new Point(rect.upperLeftPoint.X, rect.upperLeftPoint.Y);
+            upperRightPoint = new Point(rect.upperRightPoint.X, rect.upperRightPoint.Y);
+
+            lowerSide = new LineSegment(rect.lowerSide.FirstPoint, rect.lowerSide.SecondPoint);
+            upperSide = new LineSegment(rect.upperSide.FirstPoint, rect.upperSide.SecondPoint);
+            leftSide = new LineSegment(rect.leftSide.FirstPoint, rect.leftSide.SecondPoint);
+            rightSide = new LineSegment(rect.rightSide.FirstPoint, rect.rightSide.SecondPoint);
+
+            width = rect.width;
+            height = rect.height;
+
+            center = new Point(rect.center.X, rect.center.Y);
+        }
+
         public double GetPerimeter()
         {
             return 2 * width + 2 * height;

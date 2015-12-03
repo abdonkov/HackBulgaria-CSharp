@@ -29,7 +29,11 @@ namespace GeometryFigures
 
         public Vector(Vector v)
         {
-            coords = v.coords;
+            coords = new double[v.coords.Length];
+            for (int i = 0; i < v.coords.Length; i++)
+            {
+                coords[i] = v.coords[i];
+            }
         }
 
         public double GetLength()

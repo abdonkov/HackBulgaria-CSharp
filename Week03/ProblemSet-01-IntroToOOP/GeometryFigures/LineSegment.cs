@@ -22,8 +22,8 @@ namespace GeometryFigures
 
         public LineSegment(LineSegment ls)
         {
-            firstPoint = ls.firstPoint;
-            secondPoint = ls.secondPoint;
+            firstPoint = new Point(ls.firstPoint.X, ls.firstPoint.Y);
+            secondPoint = new Point(ls.secondPoint.X, ls.secondPoint.Y);
         }
 
         public double GetLength()
