@@ -11,9 +11,9 @@ namespace Pair
         static void Main(string[] args)
         {
 
-            Pair pair1 = new Pair(20, "asd");
-            Pair pair2 = new Pair(20, "asd");
-            Pair pair3 = new Pair(20, "asdf");
+            Pair<int, string> pair1 = new Pair<int, string>(20, "asd");
+            Pair<int, string> pair2 = new Pair<int, string>(20, "asd");
+            Pair<int, string> pair3 = new Pair<int, string>(20, "asdf");
 
             Console.WriteLine(pair1.Equals(pair2));
             Console.WriteLine(pair1 == pair2);
@@ -24,6 +24,11 @@ namespace Pair
             Console.WriteLine(pair1.Equals(pair3));
             Console.WriteLine(pair1 == pair3);
             Console.WriteLine(pair1 != pair3);
+
+            Console.WriteLine();
+
+            Pair<char, string> pair4 = new Pair<char, string>('a', "blabla");
+            Console.WriteLine(pair4);
 
             Console.ReadKey();
         }

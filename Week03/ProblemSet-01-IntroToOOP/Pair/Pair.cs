@@ -6,19 +6,17 @@ using System.Threading.Tasks;
 
 namespace Pair
 {
-    class Pair
+    class Pair<T1, T2>
     {
-        private readonly object firstMember;
-        private readonly object secondMember;
-        public object FirstMember { get { return firstMember; } }
-        public object SecondMember { get { return secondMember; } }
+        private readonly T1 firstMember;
+        private readonly T2 secondMember;
+        public T1 FirstMember { get { return firstMember; } }
+        public T2 SecondMember { get { return secondMember; } }
 
-        public Pair(params object[] pair)
+        public Pair(T1 firstMember, T2 secondMember)
         {
-            if (pair.Length != 2) throw new ArgumentException("Pair can have only 2 objects!");
-
-            firstMember = pair[0];
-            secondMember = pair[1];
+            this.firstMember = firstMember;
+            this.secondMember = secondMember;
         }
 
         public override string ToString()
@@ -29,8 +27,8 @@ namespace Pair
             if (firstMember == null) firstMemberString = "null";
             if (secondMember == null) secondMemberString = "null";
 
-            if (firstMember is char || firstMember is string) firstMemberString = (string)firstMember;
-            if (secondMember is char || secondMember is string) secondMemberString = (string)secondMember;
+            if (firstMember is char || firstMember is string) firstMemberString = firstMember.ToString();
+            if (secondMember is char || secondMember is string) secondMemberString = secondMember.ToString();
 
             if (firstMember is ValueType) firstMemberString = firstMember.ToString();
             if (secondMember is ValueType) secondMemberString = secondMember.ToString();
@@ -43,9 +41,9 @@ namespace Pair
 
         public override bool Equals(object obj)
         {
-            if (obj is Pair)
+            if (obj is Pair<T1, T2>)
             {
-                Pair pair = obj as Pair;
+                Pair<T1, T2> pair = obj as Pair<T1, T2>;
                 if (!firstMember.Equals(pair.firstMember)) return false;
                 if (!secondMember.Equals(pair.secondMember)) return false;
 
@@ -65,12 +63,12 @@ namespace Pair
             }
         }
 
-        public static bool operator ==(Pair pair1, Pair pair2)
+        public static bool operator ==(Pair<T1, T2> pair1, Pair<T1, T2> pair2)
         {
             return object.Equals(pair1, pair2);
         }
 
-        public static bool operator !=(Pair pair1, Pair pair2)
+        public static bool operator !=(Pair<T1, T2> pair1, Pair<T1, T2> pair2)
         {
             return !object.Equals(pair1, pair2);
         }
