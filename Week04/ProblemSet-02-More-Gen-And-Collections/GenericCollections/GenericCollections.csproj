@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DynamicArray.cs" />
+    <Compile Include="HashMap.cs" />
     <Compile Include="LinkedList.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

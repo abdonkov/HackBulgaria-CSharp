@@ -88,6 +88,33 @@ namespace ProblemSet_02_More_Gen_And_Collections
 
             Console.WriteLine(map.Count); //output: 2
 
+            Console.WriteLine("---Hash Map test---");
+
+            var hashMap = new Map<int, string>();
+
+            hashMap.Add(1, "a");
+            hashMap.Add(2, "a");
+            hashMap.Add(3, "s");
+
+            Console.WriteLine(hashMap.Count); //output: 3
+
+            try
+            {
+                hashMap.Add(2, "v");
+            }
+            catch (ArgumentException argEx)
+            {
+                Console.WriteLine(argEx.Message); //exception message
+            }
+
+            Console.WriteLine(hashMap.ContainsKey(2)); //output: True
+            Console.WriteLine(hashMap.ContainsValue("a")); //output: True
+            hashMap.Remove(2);
+            Console.WriteLine(hashMap.ContainsKey(2)); //output: False
+            Console.WriteLine(hashMap.ContainsValue("a")); //output: True
+
+            Console.WriteLine(hashMap.Count); //output: 2
+            
             Console.ReadKey();
         }
     }
