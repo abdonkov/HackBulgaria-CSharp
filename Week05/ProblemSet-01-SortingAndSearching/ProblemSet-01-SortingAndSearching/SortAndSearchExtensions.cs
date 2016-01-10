@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace ProblemSet_01_SortingAndSearching
 {
+    public delegate int CompareDelegate<T>(T x, T y);
+
     public static class SortAndSearchExtensions
     {
         public static IList<T> BubbleSort<T>(this IList<T> listToSort)
@@ -34,6 +36,28 @@ namespace ProblemSet_01_SortingAndSearching
 
             return listToSort;
         } 
+
+        public static IList<T> BubbleSort<T>(this IList<T> listToSort, CompareDelegate<T> comparer)
+        {
+            bool hasChange;
+            do
+            {
+                hasChange = false;
+                for (int i = 0; i < listToSort.Count - 1; i++)
+                {
+                    if (comparer(listToSort[i], listToSort[i + 1]) > 0)
+                    {
+                        T temp = listToSort[i];
+                        listToSort[i] = listToSort[i + 1];
+                        listToSort[i + 1] = temp;
+                        hasChange = true;
+                    }
+                }
+            }
+            while (hasChange);
+
+            return listToSort;
+        }
 
         public static IList<T> SelectionSort<T>(this IList<T> listToSort)
         {

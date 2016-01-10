@@ -50,11 +50,20 @@ namespace ProblemSet_01_SortingAndSearching
             }
         }
 
+        static int ReverseIntComparer(int x, int y)
+        {
+            return y - x;
+        }
+
         static void Main(string[] args)
         {
             int[] array1 = new int[] { 2, 4, 1, 6, 10 };
             int[] sortedArray1 = array1.BubbleSort().ToArray();
-            Console.WriteLine("Bubble Sort: {0}", string.Join(", ", sortedArray1));
+            Console.WriteLine("Bubble Sort using IComparer: {0}", string.Join(", ", sortedArray1));
+
+            int[] array11 = new int[] { 2, 4, 1, 6, 10 };
+            int[] sortedArray11 = array11.BubbleSort(ReverseIntComparer).ToArray();
+            Console.WriteLine("Bubble Sort (reverse) using delegate: {0}", string.Join(", ", sortedArray11));
 
             Console.WriteLine();
 
