@@ -96,6 +96,12 @@ namespace ProblemSet_01_SortingAndSearching
             int?[] sortedArray6 = array6.QuickSort(new OddEvenComparer()).ToArray();
             Console.WriteLine("OddEvenComparer: {0}", string.Join(", ", sortedArray6));
 
+            Console.WriteLine();
+
+            int[] array7 = new int[] { 2, 1, 6, 10, 5, 6, 9, 1, 11, 25 , 25, 63};
+            int[] sortedArray7 = array7.QuickSort(ReverseIntComparer).ToArray();
+            Console.WriteLine("Quick Sort (reverse) using delegate: {0}", string.Join(", ", sortedArray7));
+
             Console.ReadKey();
         }
     }
