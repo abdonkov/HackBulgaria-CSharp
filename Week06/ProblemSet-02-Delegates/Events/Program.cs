@@ -9,38 +9,6 @@ namespace Events
 {
     class Program
     {
-        static void AverageChangeHandle(object sender, decimal oldAverage, decimal newAverage)
-        {
-            Console.Write("--->Handler: ");
-            Console.WriteLine("Average changed from {0} to {1}.", oldAverage, newAverage);
-        }
-
-        static void CollectionChangeHandle(object sender, ItemChangeType changeType, int changedItemIndex, string changedItemInfo = null)
-        {
-            Console.Write("--->Handler: ");
-            switch (changeType)
-            {
-                case ItemChangeType.Add:
-                    Console.WriteLine("Added item to collection on {0} index!", changedItemIndex);
-                    break;
-                case ItemChangeType.Insert:
-                    Console.WriteLine("Inserted item in collection on {0} index!", changedItemIndex);
-                    break;
-                case ItemChangeType.Remove:
-                    if(changedItemIndex == -1) Console.WriteLine("Collection items cleared!");
-                    else Console.WriteLine("Removed item from collection being on {0} index!", changedItemIndex);
-                    break;
-                case ItemChangeType.Replace:
-                    Console.WriteLine("Replaced item in collection being on {0} index!", changedItemIndex);
-                    break;
-                case ItemChangeType.ChangedProperty:
-                    Console.WriteLine("Item on {0} index property {1} changed!", changedItemIndex, changedItemInfo);
-                    break;
-                default:
-                    break;
-            }
-        }
-
         static void MessageReceivedHandle(object sender, EventArgs e)
         {
             ReceiveBufferEventArgs rbe = (ReceiveBufferEventArgs)e;
@@ -51,7 +19,12 @@ namespace Events
         {
             Console.InputEncoding = Encoding.Unicode;
             Console.OutputEncoding = Encoding.Unicode;
-            AverageAggregator averageAgg = new AverageAggregator(AverageChangeHandle);
+            AverageAggregator averageAgg = new AverageAggregator
+                (delegate (object sender, decimal oldAverage, decimal newAverage)
+                {
+                    Console.Write("--->Handler: ");
+                    Console.WriteLine("Average changed from {0} to {1}.", oldAverage, newAverage);
+                });
 
             Console.WriteLine("---AverageAggregator---");
             Console.WriteLine();
@@ -87,7 +60,32 @@ namespace Events
             Console.WriteLine("---NotifyCollection---");
             Console.WriteLine();
 
-            NotifyCollection<Book> notCol = new NotifyCollection<Book>(CollectionChangeHandle);
+            NotifyCollection<Book> notCol = new NotifyCollection<Book>
+                ((sender, changeType, changedItemIndex, changedItemInfo) =>
+                {
+                    Console.Write("--->Handler: ");
+                    switch (changeType)
+                    {
+                        case ItemChangeType.Add:
+                            Console.WriteLine("Added item to collection on {0} index!", changedItemIndex);
+                            break;
+                        case ItemChangeType.Insert:
+                            Console.WriteLine("Inserted item in collection on {0} index!", changedItemIndex);
+                            break;
+                        case ItemChangeType.Remove:
+                            if (changedItemIndex == -1) Console.WriteLine("Collection items cleared!");
+                            else Console.WriteLine("Removed item from collection being on {0} index!", changedItemIndex);
+                            break;
+                        case ItemChangeType.Replace:
+                            Console.WriteLine("Replaced item in collection being on {0} index!", changedItemIndex);
+                            break;
+                        case ItemChangeType.ChangedProperty:
+                            Console.WriteLine("Item on {0} index property {1} changed!", changedItemIndex, changedItemInfo);
+                            break;
+                        default:
+                            break;
+                    }
+                });
 
             Book book1 = new Book("author1", "book1", 2000);
             Book book2 = new Book("author2", "book2", 2001);
