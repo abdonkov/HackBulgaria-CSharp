@@ -1,0 +1,79 @@
+﻿<Window x:Class="Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calculator"
+        mc:Ignorable="d"
+        Title="Calculator" Height="480" Width="400"
+        MinHeight="480" MinWidth="400"
+        WindowStyle="ThreeDBorderWindow" KeyUp="Window_KeyUp">
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <!--#region Buttons-->
+            <Button Grid.Row="0" Grid.Column="0" Name="sqrtButton" BorderThickness="0" Click="sqrtButton_Click">Sqrt</Button>
+            <Button Grid.Row="0" Grid.Column="1" Name="log2Button" BorderThickness="0" Click="log2Button_Click">Log2</Button>
+            <Button Grid.Row="0" Grid.Column="2" Name="xPowerOf2Button" BorderThickness="0" Click="xPowerOf2Button_Click">x^2</Button>
+            <Button Grid.Row="0" Grid.Column="3" Name="xRecipricalButton" BorderThickness="0" Click="xRecipricalButton_Click">1/x</Button>
+            <Button Grid.Row="1" Grid.Column="0" Name="ceButton" BorderThickness="0" Click="ceButton_Click">CE</Button>
+            <Button Grid.Row="1" Grid.Column="1" Name="cButton" BorderThickness="0" Click="cButton_Click">C</Button>
+            <Button Grid.Row="1" Grid.Column="2" Name="delButton" BorderThickness="0" Click="delButton_Click">Del</Button>
+            <Button Grid.Row="1" Grid.Column="3" Name="divideButton" BorderThickness="0" Click="divideButton_Click">/</Button>
+            <Button Grid.Row="2" Grid.Column="0" Name="num7Button" BorderThickness="0" Click="num7Button_Click">7</Button>
+            <Button Grid.Row="2" Grid.Column="1" Name="num8Button" BorderThickness="0" Click="num8Button_Click">8</Button>
+            <Button Grid.Row="2" Grid.Column="2" Name="num9Button" BorderThickness="0" Click="num9Button_Click">9</Button>
+            <Button Grid.Row="2" Grid.Column="3" Name="multiplyButton" BorderThickness="0" Click="multiplyButton_Click">*</Button>
+            <Button Grid.Row="3" Grid.Column="0" Name="num4Button" BorderThickness="0" Click="num4Button_Click">4</Button>
+            <Button Grid.Row="3" Grid.Column="1" Name="num5Button" BorderThickness="0" Click="num5Button_Click">5</Button>
+            <Button Grid.Row="3" Grid.Column="2" Name="num6Button" BorderThickness="0" Click="num6Button_Click">6</Button>
+            <Button Grid.Row="3" Grid.Column="3" Name="subtractButton" BorderThickness="0" Click="subtractButton_Click">-</Button>
+            <Button Grid.Row="4" Grid.Column="0" Name="num1Button" BorderThickness="0" Click="num1Button_Click">1</Button>
+            <Button Grid.Row="4" Grid.Column="1" Name="num2Button" BorderThickness="0" Click="num2Button_Click">2</Button>
+            <Button Grid.Row="4" Grid.Column="2" Name="num3Button" BorderThickness="0" Click="num3Button_Click">3</Button>
+            <Button Grid.Row="4" Grid.Column="3" Name="sumButton" BorderThickness="0" Click="sumButton_Click">+</Button>
+            <Button Grid.Row="5" Grid.Column="0" Name="signChangeButton" BorderThickness="0" Click="signChangeButton_Click">+/-</Button>
+            <Button Grid.Row="5" Grid.Column="1" Name="num0Button" BorderThickness="0" Click="num0Button_Click">0</Button>
+            <Button Grid.Row="5" Grid.Column="2" Name="dotButton" BorderThickness="0" Click="dotButton_Click">.</Button>
+            <Button Grid.Row="5" Grid.Column="3" Name="equalButton" BorderThickness="0" Click="equalButton_Click">=</Button>
+            <!--#endregion-->
+        </Grid>
+        <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="1" x:Name="calcTextBlock"
+                       Style="{DynamicResource TextBlock}"
+                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                       TextWrapping="Wrap" LineHeight="50" 
+                       Text="0" TextAlignment="Right"
+                       FontSize="33" FontFamily="Arial" FontWeight="Bold"/>
+            <TextBlock Grid.Row="0" x:Name="backupTextBlock"
+                       Style="{DynamicResource TextBlock}"
+                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                       TextWrapping="Wrap" LineHeight="50"
+                       Text="" TextAlignment="Right"
+                       FontSize="12" FontFamily="Arial"/>
+            <Button Grid.Row="1" Name="themeChangeButton" BorderThickness="0"
+                    HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="themeChangeButton_Click">Change Theme</Button>
+        </Grid>
+    </Grid>
+</Window>

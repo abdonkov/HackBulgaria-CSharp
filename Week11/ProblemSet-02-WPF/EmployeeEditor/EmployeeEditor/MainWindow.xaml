@@ -1,0 +1,57 @@
+﻿<Window x:Class="EmployeeEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmployeeEditor"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Window.Resources>
+        <CollectionViewSource x:Key="employeeViewSource"
+                              d:Source="{d:DesignInstance {x:Type local:Employee}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource employeeViewSource}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="1" 
+                Name="updateDatabaseButton"
+                Width="200"
+                Height="40"
+                HorizontalAlignment="Left"
+                Margin="100, 0, 0, 0" Click="updateDatabaseButton_Click">Update Database</Button>
+        <Button Grid.Row="1" 
+                Name="exitButton"
+                Width="200"
+                Height="40"
+                HorizontalAlignment="Right"
+                Margin="0, 0, 100, 0" Click="exitButton_Click">Exit</Button>
+
+        <DataGrid Name="employeeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"
+                  ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected"
+                  CellEditEnding="employeeDataGrid_CellEditEnding" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}"
+                                    Header="First Name"/>
+                <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}"
+                                    Header="Last Name"/>
+                <DataGridTextColumn x:Name="emailColumn" Binding="{Binding Email}"
+                                    Header="Email"/>
+                <DataGridTemplateColumn x:Name="birthDateColumn" Header="Birth Date">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding BirthDate}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <DatePicker x:Name="testDP" SelectedDate="{Binding BirthDate}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
