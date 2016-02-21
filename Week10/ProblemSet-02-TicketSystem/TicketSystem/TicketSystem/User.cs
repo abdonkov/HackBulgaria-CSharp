@@ -34,6 +34,8 @@ namespace TicketSystem
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+        [Required]
+        public bool IsAdmin { get; set; }
 
         public User() { }
 

@@ -924,6 +924,7 @@ namespace TicketSystemApp
                     user.CreditCardNumber = creditCardNumber;
                     user.Address = address;
                     user.ZipCode = zipCode;
+                    user.IsAdmin = true;
                     if (hasCard) user.DiscountCardID = discountId;
 
                     db.Users.Add(user);
