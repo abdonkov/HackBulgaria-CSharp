@@ -1,0 +1,245 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TicketSystemApp"
+        xmlns:TicketSystem="clr-namespace:TicketSystem;assembly=TicketSystem" x:Class="TicketSystemApp.AdminWindow"
+        mc:Ignorable="d"
+        Title="Ticket System" Height="600" Width="800" MinHeight="600" MinWidth="800"
+        Background="#FFCCE3FF" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="cityViewSource" d:DesignSource="{d:DesignInstance {x:Type TicketSystem:City}, CreateList=True}"/>
+        <CollectionViewSource x:Key="scheduleViewSource" d:DesignSource="{d:DesignInstance {x:Type TicketSystem:Schedule}, CreateList=True}"/>
+        <CollectionViewSource x:Key="trainViewSource" d:DesignSource="{d:DesignInstance {x:Type TicketSystem:Train}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid>
+        <TabControl Name="mainTabControl" Background="Transparent" SelectionChanged="mainTabControl_SelectionChanged">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gray" CornerRadius="4,4,0,0" Margin="2,0">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="LightSkyBlue" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="Transparent" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+
+            <TabItem x:Name="citiesTab" Header="Cities">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Name="startCityButton" Grid.Column="1" VerticalAlignment="Center"
+                            HorizontalAlignment="Center" Background="LightSkyBlue"
+                            Height="25" Width="100" Click="startCityButton_Click">Set as start city</Button>
+
+                    <Label Name="chosenStartCityLabel" Grid.Column="2" VerticalAlignment="Center"
+                           HorizontalAlignment="Left">Start city: None</Label>
+
+                    <Button Name="endCityButton" Grid.Column="3" VerticalAlignment="Center"
+                            HorizontalAlignment="Center" Background="LightSkyBlue"
+                            Height="25" Width="100" Click="endCityButton_Click">Set as end city</Button>
+
+                    <Label Name="chosenEndCityLabel" Grid.Column="4" VerticalAlignment="Center"
+                           HorizontalAlignment="Left">End city: None</Label>
+                    
+                    <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Content="Edit cities:"/>
+
+                    <DataGrid x:Name="cityDataGrid" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
+                              AutoGenerateColumns="False" EnableRowVirtualization="True"
+                              Background="Transparent" Margin="5,5,5,5"
+                              SelectionMode="Single" RowDetailsVisibilityMode="VisibleWhenSelected"
+                              RowEditEnding="cityDataGrid_RowEditEnding" BeginningEdit="cityDataGrid_BeginningEdit"
+                              CommandManager.PreviewCanExecute="cityDataGrid_PreviewCanExecute">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="LightSkyBlue"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                                <Setter Property="BorderThickness" Value="0, 0, 1, 0"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.ItemsSource>
+                            <Binding Source="{StaticResource cityViewSource}"/>
+                        </DataGrid.ItemsSource>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="cityIDColumn"
+                                                Binding="{Binding CityID, UpdateSourceTrigger=PropertyChanged}"
+                                                Header="City ID" Width="50" IsReadOnly="True"/>
+                            <DataGridTextColumn x:Name="nameColumn"
+                                                Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                                Header="Name" Width="150"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="trainsTab" Header="Trains">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Name="trainButton" Grid.Column="1" VerticalAlignment="Center"
+                            HorizontalAlignment="Center" Background="LightSkyBlue"
+                            Height="25" Width="120" Click="trainButton_Click">Set train for schedule</Button>
+
+                    <Label Name="chosenTrainLabel" Grid.Column="2" VerticalAlignment="Center"
+                           HorizontalAlignment="Left">Train: None</Label>
+
+                    <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Content="Edit trains:"/>
+
+                    <DataGrid x:Name="trainDataGrid" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                              AutoGenerateColumns="False" EnableRowVirtualization="True"
+                              Background="Transparent" Margin="5,5,5,5"
+                              SelectionMode="Single" RowDetailsVisibilityMode="VisibleWhenSelected"
+                              RowEditEnding="trainDataGrid_RowEditEnding" BeginningEdit="trainDataGrid_BeginningEdit"
+                              CommandManager.PreviewCanExecute="trainDataGrid_PreviewCanExecute">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="LightSkyBlue"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                                <Setter Property="BorderThickness" Value="0, 0, 1, 0"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.ItemsSource>
+                            <Binding Source="{StaticResource trainViewSource}"/>
+                        </DataGrid.ItemsSource>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="trainIDColumn"
+                                                Binding="{Binding TrainID, UpdateSourceTrigger=PropertyChanged}"
+                                                Header="Train ID" Width="50" IsReadOnly="True"/>
+                            <DataGridTextColumn x:Name="seatsColumn"
+                                                Binding="{Binding NumberOfSeats, UpdateSourceTrigger=PropertyChanged}"
+                                                Header="Seats" Width="50"/>
+                            <DataGridTextColumn x:Name="descriptionColumn"
+                                                Binding="{Binding BriefDescription, UpdateSourceTrigger=PropertyChanged}"
+                                                Header="Brief Description"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="schedulesTab" Header="Schedules">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Content="Slected start city:"/>
+
+                    <Label Name="startCityInScheduleLabel" Grid.Column="1" VerticalAlignment="Center"
+                           HorizontalAlignment="Center" Content="None"/>
+
+                    <Label Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Content="Slected end city:"/>
+
+                    <Label Name="endCityInScheduleLabel" Grid.Column="3" VerticalAlignment="Center"
+                           HorizontalAlignment="Center" Content="None"/>
+
+                    <Label Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Content="Slected train:"/>
+
+                    <TextBlock Name="trainInScheduleTextBlock" Grid.Column="5" VerticalAlignment="Center"
+                           HorizontalAlignment="Center" Text="None" TextWrapping="Wrap"/>
+
+                    <Button Name="addScheduleButton" Grid.Column="6" HorizontalAlignment="Center"
+                            VerticalAlignment="Center" Background="LightSkyBlue"
+                            Height="30" Width="90" Click="addScheduleButton_Click">Add schedule</Button>
+
+                    <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Content="Edit trains:"/>
+
+                    <DataGrid Name="scheduleDataGrid" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="7"
+                              AutoGenerateColumns="False" EnableRowVirtualization="True"
+                              Background="Transparent" Margin="5, 5, 5, 5" CanUserAddRows="False"
+                              SelectionMode="Single" RowDetailsVisibilityMode="VisibleWhenSelected"
+                              RowEditEnding="scheduleDataGrid_RowEditEnding" BeginningEdit="scheduleDataGrid_BeginningEdit"
+                              CommandManager.PreviewCanExecute="scheduleDataGrid_PreviewCanExecute">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="LightSkyBlue"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                                <Setter Property="BorderThickness" Value="0, 0, 1, 0"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.ItemsSource>
+                            <Binding Source="{StaticResource scheduleViewSource}"/>
+                        </DataGrid.ItemsSource>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="scheduleColumn"
+                                                Binding="{Binding ScheduleID, UpdateSourceTrigger=PropertyChanged}"
+                                                Header="Schedule ID" IsReadOnly="True"/>
+                            <DataGridTextColumn x:Name="startCityColumn"
+                                                Binding="{Binding StartCityID, UpdateSourceTrigger=PropertyChanged}"
+                                                Header="Start City ID"/>
+                            <DataGridTextColumn x:Name="endCityColumn"
+                                                Binding="{Binding EndCityID, UpdateSourceTrigger=PropertyChanged}"
+                                                Header="End City ID"/>
+                            <DataGridTextColumn x:Name="trainForScheduleColumn"
+                                                Binding="{Binding TrainID, UpdateSourceTrigger=PropertyChanged}"
+                                                Header="Train ID"/>
+                            <DataGridTextColumn x:Name="departureTime"
+                                                Binding="{Binding DepartureTime, UpdateSourceTrigger=PropertyChanged}"
+                                                Header="Departure Time"/>
+                            <DataGridTextColumn x:Name="travelTimeColumn"
+                                                Binding="{Binding TravelTime, UpdateSourceTrigger=PropertyChanged}"
+                                                Header="Travel Time"/>
+                            <DataGridTextColumn x:Name="ticketPriceColumn"
+                                                Binding="{Binding TicketPrice, UpdateSourceTrigger=PropertyChanged}"
+                                                Header="Ticket Price"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
