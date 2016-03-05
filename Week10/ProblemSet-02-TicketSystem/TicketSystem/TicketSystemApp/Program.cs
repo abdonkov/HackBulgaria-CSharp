@@ -283,11 +283,11 @@ namespace TicketSystemApp
                     return;
                 }
 
-                Console.Write("Departure time (yyyy-MM-dd hh:mm fromat): ");
+                Console.Write("Departure time (yyyy-MM-dd HH:mm fromat): ");
                 var departerTimeArg = Console.ReadLine().Trim();
 
                 DateTime departureTime;
-                if (!DateTime.TryParseExact(departerTimeArg, "yyyy-MM-dd hh:mm", null, System.Globalization.DateTimeStyles.None, out departureTime))
+                if (!DateTime.TryParseExact(departerTimeArg, "yyyy-MM-dd HH:mm", null, System.Globalization.DateTimeStyles.None, out departureTime))
                 {
                     Console.WriteLine("Invalid date and time format! Operation aborted!");
                     return;
