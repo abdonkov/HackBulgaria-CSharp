@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EmployeeEditor.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Birth Date</th>
+        <th>Department Name</th>
+        <th>Manager</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDate)
+        </td>
+        <td>
+            @{
+                string departmentName = item.Department1?.Name ?? "None";
+            }
+            @Html.DisplayFor(modelItem => departmentName)
+        </td>
+        <td>
+            @{
+                string fullName = item.Employee1 == null ? "None"
+                                                        : item.Employee1.FirstName
+                                                        + " "
+                                                        + item.Employee1.LastName;
+            }
+            @Html.DisplayFor(modelItem => fullName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EmployeeID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EmployeeID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EmployeeID })
+        </td>
+    </tr>
+}
+
+</table>
