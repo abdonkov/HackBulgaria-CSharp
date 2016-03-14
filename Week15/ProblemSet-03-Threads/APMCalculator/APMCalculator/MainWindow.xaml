@@ -1,0 +1,21 @@
+﻿<Window x:Class="APMCalculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:APMCalculator"
+        mc:Ignorable="d"
+        Title="APM Calculator" Height="300" Width="400" ResizeMode="NoResize"
+        Loaded="Window_Loaded" MouseUp="Window_MouseUp"
+        Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Name="apmLabel" HorizontalAlignment="Center" VerticalAlignment="Top"
+               FontSize="18" FontFamily="Times New Roman" Foreground="Blue">
+            Actions per minute: 0
+        </Label>
+    </Grid>
+</Window>
