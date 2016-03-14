@@ -32,16 +32,6 @@ namespace TicketSystemApp
         {
             usernameTextBox.Focus();
             dbContext = new TicketDB();
-
-            //Auto user1 login
-            //usernameTextBox.Text = "user1";
-            //passwordBox.Password = "password";
-            //loginButton_Click(sender, e);
-
-            //Auto admin1 login
-            usernameTextBox.Text = "admin1";
-            passwordBox.Password = "password";
-            loginButton_Click(sender, e);
         }
 
         private void textBoxes_KeyDown(object sender, KeyEventArgs e)
