@@ -1,0 +1,10 @@
+﻿<Window x:Name="Options" x:Class="BouncingBalls.OptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="OptionsWindow" Height="400" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Options_Loaded">
+    <Grid Background="#FF5C9B65">
+        <Button Name="SaveButton" Content="Save" HorizontalAlignment="Left" Height="47" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="123" Background="#FFFB7A7A" Click="SaveButton_Click"/>
+        <Button Name="BackButton" Content="Back" HorizontalAlignment="Right" Height="47" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="123" Background="#FFFB7A7A" Click="BackButton_Click"/>
+
+    </Grid>
+</Window>

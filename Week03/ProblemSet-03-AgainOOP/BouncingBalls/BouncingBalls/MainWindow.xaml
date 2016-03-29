@@ -1,0 +1,10 @@
+﻿<Window x:Name="StartMenu" x:Class="BouncingBalls.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Menu" Height="300" Width="200" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="StartMenu_Loaded">
+    <Grid Background="#FF5C9B65">
+        <Button Name="StartGameButton" Content="Start Game" HorizontalAlignment="Center" Height="44" Margin="48,34,46,0" VerticalAlignment="Top" Width="100" Background="#FFFB7A7A" Click="StartGameButton_Click"/>
+        <Button Name="OptionsButton" Content="Options" HorizontalAlignment="Center" Height="44" Margin="48,115,46,0" VerticalAlignment="Top" Width="100" Background="#FFFB7A7A" Click="OptionsButton_Click"/>
+        <Button Name="ExitButton" Content="Exit" HorizontalAlignment="Center" Height="44" Margin="48,195,46,0" VerticalAlignment="Top" Width="100" Background="#FFFB7A7A" Click="ExitButton_Click"/>
+    </Grid>
+</Window>

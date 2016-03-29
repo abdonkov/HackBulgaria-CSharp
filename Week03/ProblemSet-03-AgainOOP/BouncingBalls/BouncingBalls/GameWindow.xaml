@@ -1,0 +1,8 @@
+﻿<Window x:Name="GameWin" x:Class="BouncingBalls.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Bouncing Balls" Height="400" Width="600" WindowStartupLocation="CenterScreen" Loaded="GameWin_Loaded" KeyDown="GameWin_KeyDown" KeyUp="GameWin_KeyUp">
+    <Grid Name="MainGrid">
+        
+    </Grid>
+</Window>
